@@ -36,7 +36,7 @@ threshold = np.quantile(max_stats, 1 - alpha)
 
 print('\nthe threshold for the non-normalized test statistic is ', threshold)
 
-print('\n\nthe threshold for the normalized test statistic is ', 2*threshold/float(tau))
+print('\n\nthe threshold for the normalized test statistic is ', threshold/float(tau))
 
 f = open(outname, 'w')
 f.write('N  =  ' + str(N) + '\n\n')
@@ -44,6 +44,6 @@ f.write('tau  =  ' + str(tau) + '\n\n')
 f.write('alpha  =  ' + str(alpha) + '\n\n')
 f.write('nsamples  =  ' + str(nsamples) + '\n\n')
 f.write('threshold  =  ' + str(threshold) + '\n\n')
-f.write('normalized  =  ' + str(2*threshold/float(tau)) + '\n\n')
+f.write('normalized  =  ' + str(threshold/float(tau)) + '\n\n')
 f.close()
 
