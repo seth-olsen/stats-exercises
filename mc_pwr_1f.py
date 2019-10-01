@@ -21,7 +21,7 @@ N = 10**6 # size of dataset
 tau = 100 # width of probe (template)
 alpha = 10**(-4) # desired overall false alarm probability
 nsamples = 1000 # number of sample datasets to draw via monte carlo 
-normd_threshold = 10.0 # threshold set by monte carlo and normalized to width
+normd_threshold = 20.0 # threshold set by monte carlo and normalized to width
 outname = 'power_test.csv' # output file name
 
 
@@ -65,17 +65,7 @@ ft_signal = np.fft.fft(np.concatenate([np.zeros(N-tau), np.ones(tau)]))
 # get random values of n_s, phi for each monte carlo sample
 #phase = eiphi(2 * np.pi * np.random.random(nsamples))
 #n_s = np.random.randint(1, N - tau - 1, nsamples)
-# INEFFICIENT
-# pwrs = []
-# for A in Avals:
-#     count = 0
-#     for i in range(nsamples):
-#         ft_data = np.fft.fft(np.random.normal(0, 1, N) + \
-#                              1j*np.random.normal(0, 1, N) + \
-#                              A*phase[i]*pulse(n_s[i]))
-#         if max(abs2(np.fft.ifft(ft_data * ft_signal))) > bar:
-#             count += 1
-#     pwrs.append(count / float(nsamples))
+# INEFFICIENT --> doesn't gain anything over selecting phi_I, n_sI
 
 # ***compute test statistic w/setting phi_I=0, n_sI=tau, tau_I=tau***
 
@@ -104,7 +94,7 @@ for i in range(nsamples):
     #while (max(abs2(Avals[Aind]*zI + z0)) < bar) and (Aind < namps):
     #    Aind += 1
     
-    # more efficient way after setting phi_I=0:
+    # more efficient way since phi_I=0:
     #re_z0 = z0.real
     #im_z0sq = (z0.imag)**2
     #while (max((Avals[Aind]*zI + re_z0)**2 + im_z0sq) < bar) and (Aind < namps):
@@ -115,7 +105,7 @@ for i in range(nsamples):
     bar_im_z0sq = bar - (z0.imag)**2
     # get real part of z that will be incremented by zI = Amin*zI(unit)
     re_z = z0.real + zI
-    # now keep incrementing as long as no element of re_z(A)**2 > bar_im_z0sq is True 
+    # now keep incrementing as long as no element of (re_z(A)**2 > bar_im_z0sq) is True 
     while (np.sum(re_z**2 > bar_im_z0sq) == 0) and (Aind < namps):
         Aind += 1
         re_z += zI
