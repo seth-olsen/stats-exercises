@@ -26,7 +26,7 @@ def write_data_txt(data, name='data'):
     f.close()
     return
 
-def write_data_csv(data, name='data'):
+def write_listdata_csv(data, name='data'):
     filename = name
     if filename[-4:] != '.csv':
         filename += '.csv'
@@ -47,10 +47,12 @@ def read_zstat_files(start_ind, max_ind, name='mc_zstats', fext='.csv'):
         arrs.append(np.genfromtxt(filename, delimiter=delim))
     return np.concatenate(arrs)
 
-def combine_zstat_files(start_ind, max_ind, name='mc_zstats', fext='.csv'):
-    outname = name + '_' + str(start_ind) + '_' + str(max_ind)
-    write_data_csv(read_zstat_files(start_ind, max_ind, \
-                                    name=name, fext=fext), name=outname)
+def combine_zstat_files(start_ind, max_ind, name='max10e6t100_stats', fext='.csv'):
+    oname = name + '_' + str(start_ind) + '_' + str(max_ind) + '.csv'
+    np.savetxt(oname, read_zstat_files(start_ind, max_ind, \
+                                       name=name, fext=fext), \
+               delimiter=',')
+    print(oname, ' successfully written') 
     return
 
 def plot_hist(data, figname='mc_hist', bin_edges=[]):
@@ -127,7 +129,9 @@ def main(outname, sample_size=1000000, tau=100, ntrials=100000):
 
 #plot_hist('mc_zstats_test.csv', figname='hist-test')
 
+combine_zstat_files(0, 10, name='max10e6t100_stats')
 
+combine_zstat_files(0, 10, name='max10e5t100_stats')
 
 
 
