@@ -129,9 +129,9 @@ def main(outname, sample_size=1000000, tau=100, ntrials=100000):
 
 #plot_hist('mc_zstats_test.csv', figname='hist-test')
 
-combine_zstat_files(149, 200, name='max10e6t100tt500stats')
+combine_zstat_files(199, 240, name='max10e6t100tt500stats')
 
-combine_zstat_files(149, 200, name='max10e5t100tt500stats')
+combine_zstat_files(199, 240, name='max10e5t100tt500stats')
 
 
 
