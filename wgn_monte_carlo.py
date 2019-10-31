@@ -134,11 +134,11 @@ def main(outname, sample_size=1000000, tau=100, ntrials=100000):
 #combine_zstat_files(100, 110, name='max10e6hann10000stats')
 #combine_zstat_files(100, 104, name='max10e4t100tt500stats')
 #combine_zstat_files(100, 110, name='max10e6z1000stats')
-combine_zstat_files(100, 110, name='max10e6z400stats')
-combine_zstat_files(100, 110, name='max10e6z200stats')
-combine_zstat_files(100, 110, name='max10e6z100stats')
-combine_zstat_files(100, 110, name='max10e6z20stats')
-combine_zstat_files(100, 110, name='max10e6z10stats')
+#combine_zstat_files(100, 110, name='max10e6z400stats')
+#combine_zstat_files(100, 110, name='max10e6z200stats')
+#combine_zstat_files(100, 110, name='max10e6z100stats')
+#combine_zstat_files(100, 110, name='max10e6z20stats')
+combine_zstat_files(100, 110, name='max10e6z1stats')
 #combine_zstat_files(100, 110, name='max10e6t100tt500h0')
 
 
